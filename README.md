@@ -19,7 +19,7 @@ Application de gestion de tâches (Todo-List) construite avec Laravel (backend) 
 ### Technologies utilisées
 - **Backend** : Laravel 10.x
 - **Frontend** : React 18.x
-- **Base de données** : MySQL
+- **Base de données** : POSTGRESQL
 - **Authentication** : Laravel Sanctum
 
 ## Architecture
@@ -44,7 +44,7 @@ L'application suit le pattern CQRS (Command Query Responsibility Segregation) :
 - PHP >= 8.1
 - Composer
 - Node.js >= 14.x
-- MySQL
+- POSTGRESQL
 ```
 
 ### Backend (Laravel)
@@ -62,10 +62,10 @@ cp .env.example .env
 php artisan key:generate
 
 # Configuration de la base de données dans .env
-DB_CONNECTION=mysql
+DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=your_database
+DB_PORT=5432
+DB_DATABASE=TodoMvc
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 
@@ -164,7 +164,9 @@ DELETE /api/todos/{id}
 ```sql
 CREATE TABLE users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    phoneNumber INT NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20),
@@ -214,24 +216,14 @@ Le système utilise des événements Laravel pour les actions sur les todos :
 - Protection CSRF
 - Vérification de propriété des todos
 
-## Tests
-
 ### Backend
 ```bash
-php artisan test
+php artisan serve
 ```
 
 ### Frontend
 ```bash
-npm test
+npm run start
 ```
 
-## Déploiement
-1. Configuration du serveur web (Apache/Nginx)
-2. Configuration des variables d'environnement
-3. Compilation des assets frontend
-4. Migration de la base de données
-5. Configuration des tâches CRON si nécessaire
 
-## Support et Maintenance
-Pour signaler un bug ou proposer une amélioration, veuillez créer une issue sur le dépôt du projet.

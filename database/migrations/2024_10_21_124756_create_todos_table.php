@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->boolean('completed')->default(false);
             $table->timestamp('completed_at')->nullable();

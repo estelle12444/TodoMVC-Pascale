@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\TodoCreated;
+use App\Events\TodoUpdated;
+use App\Events\TodoDeleted;
+use App\Listeners\HandleTodoCreated;
+use App\Listeners\HandleTodoDeleted;
+use App\Listeners\HandleTodoUpdated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +23,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        TodoCreated::class => [
+            HandleTodoCreated::class,
+        ],
+        TodoUpdated::class => [
+            HandleTodoUpdated::class,
+        ],
+        TodoDeleted::class => [
+            HandleTodoDeleted::class,
         ],
     ];
 

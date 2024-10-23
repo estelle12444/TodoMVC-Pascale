@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -17,8 +18,14 @@ class todosSeeder extends Seeder
     {
         $faker = Faker::create();
 
-            for ($i = 0; $i < 20; $i++) {
+        // Nous allons afficher tous les utilisateurs
+        $users = User::all();
+
+        foreach ($users as $user) {
+            // Pour chaque utilisateur, on crée 4todos
+            for ($i = 0; $i < 4; $i++) {
                 Todo::create([
+                    'user_id' => $user->id,
                     'name' => $faker->sentence(3, true),
                     'completed' => $faker->boolean(50),
                     'completed_at' => $faker->boolean(50) ? $faker->dateTimeBetween('-1 month', 'now') : null,
@@ -26,5 +33,6 @@ class todosSeeder extends Seeder
                     'updated_at' => $faker->dateTimeBetween('-1 month', 'now'),
                 ]);
             }
+        }
     }
 }

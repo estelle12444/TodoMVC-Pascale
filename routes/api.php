@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TodoCommandController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\TodoQueryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +19,28 @@ use App\Http\Controllers\TodoController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'getCurrentUser']);
+
+
+    //  lecture
+    Route::get('todos', [TodoQueryController::class, 'index']);
+    Route::get('todos/{id}', [TodoQueryController::class, 'show']);
+
+    // Ecriture
+    Route::post('todos', [TodoCommandController::class, 'store']);
+    Route::put('todos/{todo}', [TodoCommandController::class, 'update']);
+    Route::delete('todos/{todo}', [TodoCommandController::class, 'destroy']);
+
 });
 
 
-Route::prefix('api')->group(function () {
-    Route::apiResource('todos', TodoController::class);
-});
+
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+
+// Route::apiResource('todos', TodoController::class);
+
+

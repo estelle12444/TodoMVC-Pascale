@@ -16,6 +16,14 @@
 ## Vue d'ensemble
 Application de gestion de tâches (Todo-List) construite avec Laravel (backend) et React (frontend) utilisant une architecture CQRS.
 
+![todo 2](https://github.com/user-attachments/assets/c26c2636-8403-4846-9d5c-5585e51047f8)
+
+![todoconexion1](https://github.com/user-attachments/assets/d482e067-4b51-4a59-97d3-65c4b830f214)
+
+
+![todo1](https://github.com/user-attachments/assets/7dfaa77e-a689-434c-98c8-9b914495486f)
+
+
 ### Technologies utilisées
 - **Backend** : Laravel 10.x
 - **Frontend** : React 18.x

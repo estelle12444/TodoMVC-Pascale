@@ -12,15 +12,15 @@ class TodoQueryController extends Controller
      */
     public function index()
     {
-       
-        return Todo::where('user_id', auth()->id())->get();
+
+        return Todo::get();
     }
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $todo = Todo::where('id', $id)->where('user_id', auth()->id())->first();
+        $todo = Todo::find($id);
         if (!$todo) {
             return response()->json(['error' => 'Todo pas trouvé'], 404);
         }

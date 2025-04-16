@@ -19,7 +19,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
+
     Route::get('/user', [UserController::class, 'getCurrentUser']);
 
 
@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('todos/{todo}', [TodoCommandController::class, 'update']);
     Route::delete('todos/{todo}', [TodoCommandController::class, 'destroy']);
 
-});
+
 
 
 

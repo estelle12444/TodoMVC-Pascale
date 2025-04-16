@@ -20,7 +20,7 @@ class TodoCommandController extends Controller
 
         $todo = new Todo();
         $todo->name = $request->name;
-        $todo->user_id = auth()->id();
+        $todo->user_id = 1;
         $todo->save();
 
          // Création de la todo
@@ -35,11 +35,18 @@ class TodoCommandController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
-        if ($todo->user_id !== auth()->id()) {
-            return response()->json(['error' => 'Pas autorisé'], 403);
-        }
+        // if ($todo->user_id !== auth()->id()) {
+        //     return response()->json(['error' => 'Pas autorisé'], 403);
+        // }
+        $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'completed' => 'sometimes|boolean'
+        ]);
+       
 
-        $todo->update($request->all());
+        $todo->update($request->only(['name', 'completed']));
+
+
 
         // Mettre à jour la todo
         event(new TodoUpdated($todo));
@@ -52,9 +59,9 @@ class TodoCommandController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        if ($todo->user_id !== auth()->id()) {
-            return response()->json(['error' => 'Pas autorisé'], 403);
-        }
+        // if ($todo->user_id !== auth()->id()) {
+        //     return response()->json(['error' => 'Pas autorisé'], 403);
+        // }
 
         $todo->delete();
 

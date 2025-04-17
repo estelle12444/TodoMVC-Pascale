@@ -227,11 +227,14 @@ Le système utilise des événements Laravel pour les actions sur les todos :
 ### Backend
 ```bash
 php artisan serve
+
+http://127.0.0.1:8000
 ```
 
 ### Frontend
 ```bash
 npm run start
+Local:   http://localhost:5173/
 ```
 
 

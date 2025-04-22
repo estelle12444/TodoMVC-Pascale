@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/env.js', function () { return response("window.env = " . json_encode([ 'API_URL' => env('API_URL'), ]) . ";")->header('Content-Type', 'application/javascript'); });
